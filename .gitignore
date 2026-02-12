@@ -1,0 +1,32 @@
+# Angular Frontend
+node_modules/
+dist/
+.angular/
+*.log
+
+# Spring Boot Backend
+target/
+*.jar
+*.war
+*.class
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+
+# Environnement
+.env
+application-local.properties
