@@ -1,0 +1,38 @@
+<div class="app-container">
+  <!-- Barre de navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">Mon E-commerce</a>
+      <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" [class.show]="!isMenuCollapsed">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Accueil</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item" *ngIf="!isLoggedIn()">
+            <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Connexion</a>
+          </li>
+          <li class="nav-item" *ngIf="isLoggedIn()">
+            <a class="nav-link" (click)="onLogout()" style="cursor: pointer;">Déconnexion</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenu principal -->
+  <main class="container">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="mt-5 py-3 bg-light">
+    <div class="container text-center">
+      <span class="text-muted">© 2024 Mon Application - Tous droits réservés</span>
+    </div>
+  </footer>
+</div>

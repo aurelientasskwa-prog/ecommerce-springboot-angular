@@ -1,0 +1,112 @@
+<div class="card mb-4">
+  <div class="card-header">
+    <h5 class="mb-0">Ajouter un nouveau produit</h5>
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="saveProduct()" #productForm="ngForm">
+      <!-- Messages d'erreur et de succès -->
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Nom du produit <span class="text-danger">*</span></label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="name" 
+          name="name" 
+          [(ngModel)]="newProduct.name" 
+          required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea 
+          class="form-control" 
+          id="description" 
+          name="description" 
+          rows="3"
+          [(ngModel)]="newProduct.description">
+        </textarea>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="price" class="form-label">Prix <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <input 
+              type="number" 
+              class="form-control" 
+              id="price" 
+              name="price" 
+              [(ngModel)]="newProduct.price" 
+              min="0.01" 
+              step="0.01" 
+              required>
+            <span class="input-group-text">€</span>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="stock" class="form-label">Stock</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            id="stock" 
+            name="stock" 
+            [(ngModel)]="newProduct.stock" 
+            min="0">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="category" class="form-label">Catégorie</label>
+          <select 
+            class="form-select" 
+            id="category" 
+            name="category" 
+            [(ngModel)]="newProduct.category">
+            <option value="DEFAULT">Général</option>
+            <option value="ELECTRONICS">Électronique</option>
+            <option value="CLOTHING">Vêtements</option>
+            <option value="BOOKS">Livres</option>
+            <option value="FOOD">Alimentation</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="sku" class="form-label">Référence (SKU) <span class="text-danger">*</span></label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="sku" 
+            name="sku" 
+            [(ngModel)]="newProduct.sku" 
+            required>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2">
+        <button 
+          type="button" 
+          class="btn btn-outline-secondary" 
+          (click)="resetForm()" 
+          [disabled]="isLoading">
+          Réinitialiser
+        </button>
+        <button 
+          type="submit" 
+          class="btn btn-primary" 
+          [disabled]="isLoading || !isFormValid()">
+          <span *ngIf="!isLoading">Ajouter le produit</span>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="login-container">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="text-center">Connexion</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Message d'erreur -->
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Champ Nom d'utilisateur -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Nom d'utilisateur</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="username" 
+            formControlName="username"
+            [ngClass]="{'is-invalid': f['username'].errors && f['username'].touched}"
+            autofocus>
+          <div *ngIf="f['username'].errors?.['required'] && f['username'].touched" class="invalid-feedback">
+            Le nom d'utilisateur est requis
+          </div>
+        </div>
+
+        <!-- Champ Mot de passe -->
+        <div class="mb-4">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input 
+            type="password" 
+            class="form-control" 
+            id="password" 
+            formControlName="password"
+            [ngClass]="{'is-invalid': f['password'].errors && f['password'].touched}">
+          <div *ngIf="f['password'].errors?.['required'] && f['password'].touched" class="invalid-feedback">
+            Le mot de passe est requis
+          </div>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="d-grid gap-2">
+          <button 
+            type="submit" 
+            class="btn btn-primary"
+            [disabled]="loading || loginForm.invalid">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            {{ loading ? 'Connexion en cours...' : 'Se connecter' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
